@@ -79,7 +79,7 @@ gulp bower
 
 spritesmith のタスクを生成する関数です。
 
-※ スプライト生成には <a href="https://github.com/Ensighten/grunt-spritesmith" target="_blank"> grunt-spritesmith</a> を使用しています。<br>
+※ スプライト生成には <a href="https://github.com/twolfson/gulp.spritesmith" target="_blank"> gulp.spritesmith</a> を使用しています。<br>
 ※ 画像の圧縮には <a href="https://github.com/imagemin/imagemin-pngquant" target="_blank">imagemin-pngquant</a> を使用しています。
 
 **Params**
