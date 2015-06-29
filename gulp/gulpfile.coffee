@@ -552,7 +552,7 @@ createBrowserifyTask(
   'browerifyTest'
 )
 
-### 個別タスクここまで ###
+### 個別タスク設定ここまで ###
 
 
 # js
