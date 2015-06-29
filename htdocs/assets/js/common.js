@@ -1,0 +1,1 @@
+(function(){window.project=window.project||{},project.Common=function(){function n(){}return n}(),$(function(){return new project.Common})}).call(this);

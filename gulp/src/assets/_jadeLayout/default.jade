@@ -1,0 +1,25 @@
+doctype html
+html(prefix="og:http://ogp.me/ns#")
+  head
+    title #{index.title}
+    meta(charset="utf-8") 
+    meta(name="keywords", content="#{index.keywords}")
+    meta(name="description", content="#{index.description}")
+    
+    meta(property="og:title", content="#{index.title}")
+    meta(property="og:url", content="#{index.url}")
+    meta(property="og:description", content="#{index.description}")
+    meta(property="og:image", content="#{index.ogImg}")
+    meta(property="og:type", content="#{index.ogType}")
+
+    link(rel="stylesheet", media="all", href="/assets/css/common.css", type="text/css")
+    link(rel="stylesheet", media="all", href="/assets/css/index.css", type="text/css")
+  
+  body
+    script(src="/assets/js/common.js")
+    script(src="/assets/js/index.js")
+      
+    include /assets/_jadeInclude/header.jade
+       
+    div#contents
+      block contents
