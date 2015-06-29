@@ -14,11 +14,6 @@ npm install
 
 ## 概要
 
-基本構造は  
-<a href="https://github.com/takumi0125/static-website-basic-src" target="_blank">takumi0125/static-website-basic-src</a>  
-を使用しています。
-
-
 `gulp` コマンドで `gulp/src/` の中身がタスクで処理され、ディレクトリ構造を保ちつつ `htdocs/` に展開されます。ただし、「 _ (アンダースコア) 」で始まるファイルやディレクトリはコンパイル・コピーの対象外です。スプライト用のソース画像を格納するディレクトリや、Sassで@import するファイルは「 _ (アンダースコア) 」をつけておけば、 `htdocs/` に展開されることはありません。
 
 `gulp watcher` コマンドでローカルサーバが立ち上がります。実行中は
@@ -29,6 +24,8 @@ http://localhost:50000/
 
 ※ <a href="https://github.com/assemble/assemble" target="_blank">assemble</a> タスクも定義されていますが、<a href="https://github.com/assemble/gulp-assemble" target="_blank">プラグイン</a>がアルファ版なので、正しく動作しない可能性があります。
 
+`src/_data.json` は jade や assemble のタスクを実行する際に読み込まれます。
+メタ情報等を定義しておけば、_data.jsonファイルで一元管理できます。
 
 ## 主要タスク
 
@@ -50,7 +47,7 @@ gulp bower
 `bower.json` で定義されているJSライブラリを `htdocs/assets/_lib/` にインストールします。開発開始時に実行して下さい。
 
 
-個別のタスクは `gulpfile.coffee` をご参照ください。
+その他のタスクは `gulpfile.coffee` をご参照ください。
 
 
 ## 個別タスク生成用関数
@@ -61,9 +58,9 @@ gulp bower
 個別タスクは
 
 ```
-################
+#################
 ### 個別タスク ###
-################
+#################
 ```
 
 と
