@@ -48,9 +48,6 @@ paths =
     "#{SRC_DIR}/**/.htaccess"
     "!#{SRC_DIR}/**/*.{html,jade,hbs,css,sass,scss,js,json,coffee,cson,md}"
     "!#{SRC_DIR}/**/img/**"
-    "!#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*/**"
-    "!#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*/"
-    "!#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*"
   ]
   jadeInclude: [
     "#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*/**/*.jade"
@@ -132,7 +129,7 @@ _errorHandler = (name)-> notify.onError title: "#{name} Error", message: '<%= er
 # タスク対象のファイル、ディレクトリの配列を生成
 _createSrcArr = (name)->
   [].concat paths[name], [
-    "!#{SRC_DIR}/#{EXCRUSION_PREFIX}*"
+    "!#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*"
     "!#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*/"
     "!#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*/**"
   ]
@@ -221,6 +218,7 @@ createCoffeeExtractTask = (taskName, src, outputDir, outputFileName) ->
   _jsTasks.push taskName
   if src instanceof String then src = [ src ]
   for srcPath in src then paths.coffeeInclude.push "!#{srcPath}"
+  console.log paths.coffeeInclude
 
   gulp.task taskName, ->
     stream = gulp.src src
@@ -308,6 +306,8 @@ createJsConcatTask = (taskName, src, outputDir, outputFileName = 'lib')->
     .pipe uglify preserveComments: 'some'
     .pipe gulp.dest outputDir
     .pipe debug title: util.colors.cyan("[#{taskName}]")
+
+  _optionsWatchTasks.push -> gulp.watch src, [ taskName ]
 
 
 
@@ -568,6 +568,9 @@ gulp.task 'sprites', _spritesTask
 
 # watcher
 gulp.task 'watcher', ->
+  # DATA_JSON更新時
+  gulp.watch DATA_JSON,   [ 'jadeAll', 'assembleAll' ]
+
   gulp.watch _createSrcArr('html'),     [ 'copyHtml' ]
   gulp.watch _createSrcArr('css'),      [ 'copyCss' ]
   gulp.watch _createSrcArr('js'),       [ 'copyJs' ]
@@ -578,6 +581,7 @@ gulp.task 'watcher', ->
   gulp.watch _createSrcArr('assemble'), [ 'assemble' ]
   gulp.watch _createSrcArr('sass'),     [ 'sass' ]
   gulp.watch _createSrcArr('coffee'),   [ 'coffee' ]
+
 
   # インクルードファイル(アンスコから始まるファイル)更新時はすべてをコンパイル
   gulp.watch paths.jadeInclude,     [ 'jadeAll' ]
