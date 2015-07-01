@@ -541,7 +541,7 @@ gulp.task 'json', [ 'copyJson' ]
 #   ]
 #   "#{PUBLISH_DIR}#{ASSETS_DIR}/js"
 #   'concatCoffeeTest'
-)
+# )
 
 # browerifyTest.js
 # createBrowserifyTask(
