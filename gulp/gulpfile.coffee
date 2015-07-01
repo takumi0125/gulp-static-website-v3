@@ -29,7 +29,7 @@ DATA_JSON = "#{SRC_DIR}/#{EXCRUSION_PREFIX}data.json"
 ASSETS_DIR = '/assets'
 
 # clean対象のディレクトリ (除外したいパスがある場合にnode-globのシンタックスで指定)
-CLEAN_DIR = [ PUBLISH_DIR ]
+CLEAN_DIR = [ "#{PUBLISH_DIR}/**" ]
 
 # 各種パス
 paths =
