@@ -521,36 +521,36 @@ gulp.task 'json', [ 'copyJson' ]
 ################
 
 # indexSprites
-createSpritesTask 'indexSprites', "#{ASSETS_DIR}/img", "#{ASSETS_DIR}/css", 'sprites', '../img/sprites.png', false
+# createSpritesTask 'indexSprites', "#{ASSETS_DIR}/img", "#{ASSETS_DIR}/css", 'sprites', '../img/sprites.png', false
 
 # lib.js
-createJsConcatTask(
-  'concatLibJs'
-  [ "#{SRC_DIR}#{ASSETS_DIR}/js/_lib/**/*" ]
-  "#{PUBLISH_DIR}#{ASSETS_DIR}/js"
-  'lib'
-)
+# createJsConcatTask(
+#   'concatLibJs'
+#   [ "#{SRC_DIR}#{ASSETS_DIR}/js/_lib/**/*" ]
+#   "#{PUBLISH_DIR}#{ASSETS_DIR}/js"
+#   'lib'
+# )
 
 # concatCoffeeTest.js
-createCoffeeExtractTask(
-  'concatCoffeeTest'
-  [
-    "#{SRC_DIR}#{ASSETS_DIR}/js/_concatCoffeeTest/main.coffee"
-    "#{SRC_DIR}#{ASSETS_DIR}/js/_concatCoffeeTest/TestClass1.coffee"
-    "#{SRC_DIR}#{ASSETS_DIR}/js/_concatCoffeeTest/TestClass2.coffee"
-  ]
-  "#{PUBLISH_DIR}#{ASSETS_DIR}/js"
-  'concatCoffeeTest'
+# createCoffeeExtractTask(
+#   'concatCoffeeTest'
+#   [
+#     "#{SRC_DIR}#{ASSETS_DIR}/js/_concatCoffeeTest/main.coffee"
+#     "#{SRC_DIR}#{ASSETS_DIR}/js/_concatCoffeeTest/TestClass1.coffee"
+#     "#{SRC_DIR}#{ASSETS_DIR}/js/_concatCoffeeTest/TestClass2.coffee"
+#   ]
+#   "#{PUBLISH_DIR}#{ASSETS_DIR}/js"
+#   'concatCoffeeTest'
 )
 
 # browerifyTest.js
-createBrowserifyTask(
-  'browerifyTest'
-  [ "#{SRC_DIR}#{ASSETS_DIR}/js/_browserifyTest/main.coffee" ]
-  [ "#{SRC_DIR}#{ASSETS_DIR}/js/_browserifyTest/**/*" ]
-  "#{PUBLISH_DIR}#{ASSETS_DIR}/js"
-  'browerifyTest'
-)
+# createBrowserifyTask(
+#   'browerifyTest'
+#   [ "#{SRC_DIR}#{ASSETS_DIR}/js/_browserifyTest/main.coffee" ]
+#   [ "#{SRC_DIR}#{ASSETS_DIR}/js/_browserifyTest/**/*" ]
+#   "#{PUBLISH_DIR}#{ASSETS_DIR}/js"
+#   'browerifyTest'
+# )
 
 ### 個別タスク設定ここまで ###
 
