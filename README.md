@@ -62,7 +62,7 @@ gulp clean
 
 ```coffeescript
 # clean対象のディレクトリ (除外したいパスがある場合にnode-globのシンタックスで指定)
-CLEAN_DIR = [ PUBLISH_DIR ]
+CLEAN_DIR = [ "#{PUBLISH_DIR}/**" ]
 ```
 
 このように指定してあります。除外したいディレクトリやファイルがある場合は、こちらに設定を追加してください。
