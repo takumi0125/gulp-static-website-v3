@@ -26,7 +26,7 @@ AUTOPREFIXER_OPT = [ 'last 2 versions', 'ie 8', 'ie 9', 'Android 4', 'iOS 8' ]
 DATA_JSON = "#{SRC_DIR}/#{EXCRUSION_PREFIX}data.json"
 
 # assetsディレクトリへドキュメントルートからの相対パス
-ASSETS_DIR = '/assets'
+ASSETS_DIR = 'assets'
 
 # clean対象のディレクトリ (除外したいパスがある場合にnode-globのシンタックスで指定)
 CLEAN_DIR = [ "#{PUBLISH_DIR}/**/*" ]
@@ -410,10 +410,10 @@ gulp.task 'jadeAll', ->
 
 # assemble
 gulp.task 'assemble', ->
-  assemble.partials "#{SRC_DIR}#{ASSETS_DIR}/_assembleInclude/**/*.hbs"
-  assemble.layouts "#{SRC_DIR}#{ASSETS_DIR}/_assembleLayout/**/*.hbs"
+  assemble.partials "#{SRC_DIR}/#{ASSETS_DIR}/_assembleInclude/**/*.hbs"
+  assemble.layouts "#{SRC_DIR}/#{ASSETS_DIR}/_assembleLayout/**/*.hbs"
   assemble.data DATA_JSON
-  # assemble.option 'assets', "#{PUBLISH_DIR}#{ASSETS_DIR}"
+  # assemble.option 'assets', "#{PUBLISH_DIR}/#{ASSETS_DIR}"
 
   gulp.src _createSrcArr 'assemble'
   .pipe changed PUBLISH_DIR, { extension: '.html' }
@@ -425,8 +425,8 @@ gulp.task 'assemble', ->
 
 # assembleAll
 gulp.task 'assembleAll', ->
-  assemble.partials "#{SRC_DIR}#{ASSETS_DIR}/_assembleInclude/**/*.hbs"
-  assemble.layouts "#{SRC_DIR}#{ASSETS_DIR}/_assembleLayout/**/*.hbs"
+  assemble.partials "#{SRC_DIR}/#{ASSETS_DIR}/_assembleInclude/**/*.hbs"
+  assemble.layouts "#{SRC_DIR}/#{ASSETS_DIR}/_assembleLayout/**/*.hbs"
   assemble.data DATA_JSON
 
   gulp.src _createSrcArr 'assemble'
@@ -523,32 +523,32 @@ gulp.task 'json', [ 'copyJson' ]
 # indexSprites
 # createSpritesTask 'indexSprites', "#{ASSETS_DIR}/img", "#{ASSETS_DIR}/css", 'sprites', '../img/sprites.png', false
 
-# lib.js
+# # lib.js
 # createJsConcatTask(
 #   'concatLibJs'
-#   [ "#{SRC_DIR}#{ASSETS_DIR}/js/_lib/**/*" ]
-#   "#{PUBLISH_DIR}#{ASSETS_DIR}/js"
+#   [ "#{SRC_DIR}/#{ASSETS_DIR}/js/_lib/**/*" ]
+#   "#{PUBLISH_DIR}/#{ASSETS_DIR}/js"
 #   'lib'
 # )
-
-# concatCoffeeTest.js
+#
+# # concatCoffeeTest.js
 # createCoffeeExtractTask(
 #   'concatCoffeeTest'
 #   [
-#     "#{SRC_DIR}#{ASSETS_DIR}/js/_concatCoffeeTest/main.coffee"
-#     "#{SRC_DIR}#{ASSETS_DIR}/js/_concatCoffeeTest/TestClass1.coffee"
-#     "#{SRC_DIR}#{ASSETS_DIR}/js/_concatCoffeeTest/TestClass2.coffee"
+#     "#{SRC_DIR}/#{ASSETS_DIR}/js/_concatCoffeeTest/main.coffee"
+#     "#{SRC_DIR}/#{ASSETS_DIR}/js/_concatCoffeeTest/TestClass1.coffee"
+#     "#{SRC_DIR}/#{ASSETS_DIR}/js/_concatCoffeeTest/TestClass2.coffee"
 #   ]
-#   "#{PUBLISH_DIR}#{ASSETS_DIR}/js"
+#   "#{PUBLISH_DIR}/#{ASSETS_DIR}/js"
 #   'concatCoffeeTest'
 # )
-
-# browerifyTest.js
+#
+# # browerifyTest.js
 # createBrowserifyTask(
 #   'browerifyTest'
-#   [ "#{SRC_DIR}#{ASSETS_DIR}/js/_browserifyTest/main.coffee" ]
-#   [ "#{SRC_DIR}#{ASSETS_DIR}/js/_browserifyTest/**/*" ]
-#   "#{PUBLISH_DIR}#{ASSETS_DIR}/js"
+#   [ "#{SRC_DIR}/#{ASSETS_DIR}/js/_browserifyTest/main.coffee" ]
+#   [ "#{SRC_DIR}/#{ASSETS_DIR}/js/_browserifyTest/**/*" ]
+#   "#{PUBLISH_DIR}/#{ASSETS_DIR}/js"
 #   'browerifyTest'
 # )
 
@@ -624,10 +624,10 @@ gulp.task 'bower', ->
           bowerJson: 'bower.json'
       .pipe plumber errorHandler: _errorHandler
       .pipe jsFilter
-      .pipe gulp.dest "#{SRC_DIR}#{ASSETS_DIR}/js/#{EXCRUSION_PREFIX}#{LIBRARY_DIR_NAME}"
+      .pipe gulp.dest "#{SRC_DIR}/#{ASSETS_DIR}/js/#{EXCRUSION_PREFIX}#{LIBRARY_DIR_NAME}"
       .pipe jsFilter.restore()
       .pipe cssFilter
-      .pipe gulp.dest "#{SRC_DIR}#{ASSETS_DIR}/css/#{EXCRUSION_PREFIX}#{LIBRARY_DIR_NAME}"
+      .pipe gulp.dest "#{SRC_DIR}/#{ASSETS_DIR}/css/#{EXCRUSION_PREFIX}#{LIBRARY_DIR_NAME}"
       .pipe cssFilter.restore()
       .pipe debug title: util.colors.cyan('[bower]:')
 
