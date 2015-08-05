@@ -199,7 +199,7 @@ createSpritesTask = (taskName, imgDir, cssDir, outputImgName = '', outputImgPath
     .pipe gulp.dest "#{SRC_DIR}/#{imgDir}"
     .pipe gulp.dest "#{PUBLISH_DIR}/#{imgDir}"
 
-    cssStream = spriteData.css.pipe gulp.dest "#{SRC_DIR}#{cssDir}"
+    cssStream = spriteData.css.pipe gulp.dest "#{SRC_DIR}/#{cssDir}"
 
     mergeStream imgStream, cssStream
 
