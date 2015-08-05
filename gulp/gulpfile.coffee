@@ -164,7 +164,7 @@ _msg = (msg)->
 createSpritesTask = (taskName, imgDir, cssDir, outputImgName = '', outputImgPath = '', compressImg = false) ->
   _spritesTask.push taskName
 
-  srcImgFiles = "#{SRC_DIR}#{imgDir}/#{EXCRUSION_PREFIX}#{taskName}/*"
+  srcImgFiles = "#{SRC_DIR}/#{imgDir}/#{EXCRUSION_PREFIX}#{taskName}/*"
   paths.img.push "!#{srcImgFiles}"
 
   gulp.task taskName, ->
