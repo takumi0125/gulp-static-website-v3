@@ -22,9 +22,7 @@ http://localhost:50000/
 ```
 で展開後のページが確認できます。
 
-※ <a href="https://github.com/assemble/assemble" target="_blank">assemble</a> タスクも定義されていますが、<a href="https://github.com/assemble/gulp-assemble" target="_blank">プラグイン</a>がアルファ版なので、正しく動作しない可能性があります。
-
-`src/_data.json` は jade や assemble のタスクを実行する際に読み込まれます。
+`src/_data.json` は jade タスクを実行する際に読み込まれます。
 メタ情報等を定義しておけば、_data.jsonファイルで一元管理できます。
 
 ## 主要タスク

@@ -35,7 +35,6 @@ CLEAN_DIR = [ "#{PUBLISH_DIR}/**/*" ]
 paths =
   html    : "#{SRC_DIR}/**/*.html"
   jade    : "#{SRC_DIR}/**/*.jade"
-  assemble: "#{SRC_DIR}/**/*.hbs"
   css     : "#{SRC_DIR}/**/*.css"
   sass    : "#{SRC_DIR}/**/*.{sass,scss}"
   js      : "#{SRC_DIR}/**/*.js"
@@ -46,16 +45,12 @@ paths =
   others  : [
     "#{SRC_DIR}/**/*"
     "#{SRC_DIR}/**/.htaccess"
-    "!#{SRC_DIR}/**/*.{html,jade,hbs,css,sass,scss,js,json,coffee,cson,md}"
+    "!#{SRC_DIR}/**/*.{html,jade,css,sass,scss,js,json,coffee,cson,md}"
     "!#{SRC_DIR}/**/img/**"
   ]
   jadeInclude: [
     "#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*/**/*.jade"
     "#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*.jade"
-  ]
-  assembleInclude: [
-    "#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*/**/*.hbs"
-    "#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*.hbs"
   ]
   sassInclude: [
     "#{SRC_DIR}/**/#{EXCRUSION_PREFIX}*/**/*.{sass,scss}"
@@ -73,7 +68,6 @@ paths =
 
 # gulp関連
 gulp         = require 'gulp'
-gulpAssemble = require 'gulp-assemble'
 autoprefixer = require 'gulp-autoprefixer'
 changed      = require 'gulp-changed'
 coffee       = require 'gulp-coffee'
@@ -95,7 +89,6 @@ util         = require 'gulp-util'
 webserver    = require 'gulp-webserver'
 
 # その他モジュール
-assemble     = require 'assemble'
 bower        = require 'main-bower-files'
 browserify   = require 'browserify'
 connectSSI   = require 'connect-ssi'
@@ -218,7 +211,6 @@ createCoffeeExtractTask = (taskName, src, outputDir, outputFileName) ->
   _jsTasks.push taskName
   if src instanceof String then src = [ src ]
   for srcPath in src then paths.coffeeInclude.push "!#{srcPath}"
-  console.log paths.coffeeInclude
 
   gulp.task taskName, ->
     stream = gulp.src src
@@ -408,36 +400,8 @@ gulp.task 'jadeAll', ->
   .pipe gulp.dest PUBLISH_DIR
   .pipe debug title: util.colors.cyan('[jadeAll]:')
 
-# assemble
-gulp.task 'assemble', ->
-  assemble.partials "#{SRC_DIR}/#{ASSETS_DIR}/_assembleInclude/**/*.hbs"
-  assemble.layouts "#{SRC_DIR}/#{ASSETS_DIR}/_assembleLayout/**/*.hbs"
-  assemble.data DATA_JSON
-  # assemble.option 'assets', "#{PUBLISH_DIR}/#{ASSETS_DIR}"
-
-  gulp.src _createSrcArr 'assemble'
-  .pipe changed PUBLISH_DIR, { extension: '.html' }
-  .pipe plumber errorHandler: _errorHandler 'assemble'
-  .pipe gulpAssemble assemble
-  .pipe extname()
-  .pipe gulp.dest PUBLISH_DIR
-  .pipe debug title: util.colors.cyan('[assemble]:')
-
-# assembleAll
-gulp.task 'assembleAll', ->
-  assemble.partials "#{SRC_DIR}/#{ASSETS_DIR}/_assembleInclude/**/*.hbs"
-  assemble.layouts "#{SRC_DIR}/#{ASSETS_DIR}/_assembleLayout/**/*.hbs"
-  assemble.data DATA_JSON
-
-  gulp.src _createSrcArr 'assemble'
-  .pipe plumber errorHandler: _errorHandler 'assemble'
-  .pipe gulpAssemble assemble
-  .pipe extname()
-  .pipe gulp.dest PUBLISH_DIR
-  .pipe debug title: util.colors.cyan('[assembleAll]:')
-
 # html
-gulp.task 'html', [ 'copyHtml', 'jade', 'assemble' ]
+gulp.task 'html', [ 'copyHtml', 'jade' ]
 
 
 ###########
@@ -569,7 +533,7 @@ gulp.task 'sprites', _spritesTask
 # watcher
 gulp.task 'watcher', ->
   # DATA_JSON更新時
-  gulp.watch DATA_JSON,   [ 'jadeAll', 'assembleAll' ]
+  gulp.watch DATA_JSON,   [ 'jadeAll' ]
 
   gulp.watch _createSrcArr('html'),     [ 'copyHtml' ]
   gulp.watch _createSrcArr('css'),      [ 'copyCss' ]
@@ -578,14 +542,12 @@ gulp.task 'watcher', ->
   gulp.watch _createSrcArr('img'),      [ 'copyImg' ]
   gulp.watch _createSrcArr('others'),   [ 'copyOthers' ]
   gulp.watch _createSrcArr('jade'),     [ 'jade' ]
-  gulp.watch _createSrcArr('assemble'), [ 'assemble' ]
   gulp.watch _createSrcArr('sass'),     [ 'sass' ]
   gulp.watch _createSrcArr('coffee'),   [ 'coffee' ]
 
 
   # インクルードファイル(アンスコから始まるファイル)更新時はすべてをコンパイル
   gulp.watch paths.jadeInclude,     [ 'jadeAll' ]
-  gulp.watch paths.assembleInclude, [ 'assembleAll' ]
   gulp.watch paths.sassInclude,     [ 'sassAll' ]
   gulp.watch paths.coffeeInclude,   [ 'coffeeAll' ]
 
