@@ -90,6 +90,7 @@ webserver    = require 'gulp-webserver'
 # その他モジュール
 bower        = require 'main-bower-files'
 browserify   = require 'browserify'
+buffer       = require 'vinyl-buffer'
 connectSSI   = require 'connect-ssi'
 del          = require 'del'
 exec         = require('child_process').exec
@@ -178,7 +179,9 @@ createSpritesTask = (taskName, imgDir, cssDir, outputImgName = '', outputImgPath
 
     # 画像圧縮
     if compressImg
-      imgStream = imgStream.pipe imagemin {
+      imgStream = imgStream
+      .pipe buffer()
+      .pipe imagemin {
         use: [
           pngquant
             quality: '60-80'
