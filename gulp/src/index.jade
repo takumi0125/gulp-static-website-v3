@@ -1,0 +1,21 @@
+//- src/_layout/_default.jadeを継承
+extends /assets/_layout/_default
+
+//- meta設定
+block vars
+  - var title = 'title';
+  - var description = 'description';
+  - var keywords = 'keywords';
+  - var bodyClass = 'index';
+
+//- ページ個別のCSS
+block css
+  link(rel="stylesheet", media="all", href="/assets/css/index.css", type="text/css")
+
+//- ページ個別のJS
+block script
+  script(src="/assets/js/index.js", type="text/javascript")
+
+//- ここからコンテンツ部分を記述
+block contents
+  
