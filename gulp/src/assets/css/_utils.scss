@@ -258,7 +258,7 @@ $easeInOutBack: cubic-bezier(0.680, -0.550, 0.265, 1.550);
   margin-bottom: auto;
 }
 
-@mixin sprite-width2x($sprite) {
+@mixin sprite-width-2x($sprite) {
   width: nth($sprite, 5) / 2;
 }
 
