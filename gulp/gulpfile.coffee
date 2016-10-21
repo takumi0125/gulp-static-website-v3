@@ -577,8 +577,8 @@ gulp.task 'bower', ->
       console.log err
     else
       # オプション指定でライブラリディレクトリに自動でインストール
-      jsFilter = filter '**/*.js'
-      cssFilter = filter '**/*.css'
+      jsFilter = filter '**/*.js', { restore: true }
+      cssFilter = filter '**/*.css', { restore: true }
       gulp.src bower
         debugging: true
         includeDev: true
@@ -588,10 +588,10 @@ gulp.task 'bower', ->
       .pipe plumber errorHandler: _errorHandler
       .pipe jsFilter
       .pipe gulp.dest "#{SRC_DIR}/#{ASSETS_DIR}/js/#{EXCRUSION_PREFIX}#{LIBRARY_DIR_NAME}"
-      .pipe jsFilter.restore()
+      .pipe jsFilter.restore
       .pipe cssFilter
       .pipe gulp.dest "#{SRC_DIR}/#{ASSETS_DIR}/css/#{EXCRUSION_PREFIX}#{LIBRARY_DIR_NAME}"
-      .pipe cssFilter.restore()
+      .pipe cssFilter.restore
       .pipe debug title: util.colors.cyan('[bower]:')
 
 
